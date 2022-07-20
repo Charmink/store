@@ -1,6 +1,7 @@
 package com.charm1nk.store.controller;
 
 import com.charm1nk.store.dto.CreateProductRequest;
+import com.charm1nk.store.dto.CreateProductResponse;
 import com.charm1nk.store.dto.GetProductResponse;
 import com.charm1nk.store.dto.GetProductsPageableResponse;
 import com.charm1nk.store.service.ProductService;
@@ -27,9 +28,9 @@ public class ProductController {
             @ApiResponse(code = 400, message = "Бизнес ошибка"),
             @ApiResponse(code = 200, message = "Внутренняя ошибка сервера")
     })
-    public void createProduct(@RequestBody CreateProductRequest createProductRequest) {
+    public CreateProductResponse createProduct(@RequestBody CreateProductRequest createProductRequest) {
         log.info("Create product request {}", createProductRequest);
-        productService.createProduct(createProductRequest);
+        return productService.createProduct(createProductRequest);
     }
 
     @GetMapping("/api/products/{productId}")

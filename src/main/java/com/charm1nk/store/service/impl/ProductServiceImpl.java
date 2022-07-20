@@ -1,6 +1,7 @@
 package com.charm1nk.store.service.impl;
 
 import com.charm1nk.store.dto.CreateProductRequest;
+import com.charm1nk.store.dto.CreateProductResponse;
 import com.charm1nk.store.dto.GetProductResponse;
 import com.charm1nk.store.dto.GetProductsPageableResponse;
 import com.charm1nk.store.exception.MakerNotExistException;
@@ -25,7 +26,7 @@ public class ProductServiceImpl implements ProductService {
     private final MakerRepository makerRepository;
     private final ProductRepository productRepository;
 
-    public void createProduct(CreateProductRequest createProductRequest) {
+    public CreateProductResponse createProduct(CreateProductRequest createProductRequest) {
         final var makerName = createProductRequest.getMakerName();
         final var partitionId = createProductRequest.getPartitionId();
 
@@ -52,6 +53,8 @@ public class ProductServiceImpl implements ProductService {
         product.setPartition(partition);
 
         productRepository.save(product);
+
+        return new CreateProductResponse(product.getId());
     }
 
     public GetProductResponse getProduct(Long productId) {
