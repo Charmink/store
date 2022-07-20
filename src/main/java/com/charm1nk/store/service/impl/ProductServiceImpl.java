@@ -2,6 +2,7 @@ package com.charm1nk.store.service.impl;
 
 import com.charm1nk.store.dto.CreateProductRequest;
 import com.charm1nk.store.dto.GetProductResponse;
+import com.charm1nk.store.dto.GetProductsPageableResponse;
 import com.charm1nk.store.exception.MakerNotExistException;
 import com.charm1nk.store.exception.PartitionNotExistException;
 import com.charm1nk.store.exception.ProductNotExistException;
@@ -12,6 +13,8 @@ import com.charm1nk.store.repository.ProductRepository;
 import com.charm1nk.store.service.ProductService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -60,5 +63,12 @@ public class ProductServiceImpl implements ProductService {
                 );
 
         return GetProductResponse.from(product);
+    }
+
+    public GetProductsPageableResponse getProducts(Integer page, Integer size) {
+        final var pageRequest = PageRequest.of(page, size, Sort.by("id").descending());
+        final var products = productRepository.findAll(pageRequest);
+
+        return GetProductsPageableResponse.from(products.getContent(), products.getTotalElements());
     }
 }
