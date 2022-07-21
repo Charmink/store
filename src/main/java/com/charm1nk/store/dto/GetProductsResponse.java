@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 @Data
 @ApiModel(description = "Постраничный список товаров")
-public class GetProductsPageableResponse {
+public class GetProductsResponse {
 
     @ApiModelProperty(value = "Общее колличество товаров")
     private Long totalElements;
@@ -18,8 +18,8 @@ public class GetProductsPageableResponse {
     @ApiModelProperty(value = "Список товаров")
     private List<GetProductResponse> data;
 
-    public static GetProductsPageableResponse from(List<Product> products, Long totalElements) {
-        final var getProductsPageableResponse = new GetProductsPageableResponse();
+    public static GetProductsResponse from(List<Product> products, Long totalElements) {
+        final var getProductsPageableResponse = new GetProductsResponse();
         getProductsPageableResponse.data = products.stream().map(GetProductResponse::from).collect(Collectors.toList());
         getProductsPageableResponse.totalElements = totalElements;
 

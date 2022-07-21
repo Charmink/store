@@ -3,7 +3,7 @@ package com.charm1nk.store.service.impl;
 import com.charm1nk.store.dto.CreateProductRequest;
 import com.charm1nk.store.dto.CreateProductResponse;
 import com.charm1nk.store.dto.GetProductResponse;
-import com.charm1nk.store.dto.GetProductsPageableResponse;
+import com.charm1nk.store.dto.GetProductsResponse;
 import com.charm1nk.store.exception.MakerNotExistException;
 import com.charm1nk.store.exception.PartitionNotExistException;
 import com.charm1nk.store.exception.ProductNotExistException;
@@ -13,6 +13,7 @@ import com.charm1nk.store.repository.PartitionRepository;
 import com.charm1nk.store.repository.ProductRepository;
 import com.charm1nk.store.service.ProductService;
 
+import com.charm1nk.store.service.search.ProductSearchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -25,6 +26,7 @@ public class ProductServiceImpl implements ProductService {
     private final PartitionRepository partitionRepository;
     private final MakerRepository makerRepository;
     private final ProductRepository productRepository;
+    private final ProductSearchService productSearchService;
 
     public CreateProductResponse createProduct(CreateProductRequest createProductRequest) {
         final var makerName = createProductRequest.getMakerName();
@@ -68,10 +70,15 @@ public class ProductServiceImpl implements ProductService {
         return GetProductResponse.from(product);
     }
 
-    public GetProductsPageableResponse getProducts(Integer page, Integer size) {
+    public GetProductsResponse getProducts(Integer page, Integer size) {
         final var pageRequest = PageRequest.of(page, size, Sort.by("id").descending());
         final var products = productRepository.findAll(pageRequest);
 
-        return GetProductsPageableResponse.from(products.getContent(), products.getTotalElements());
+        return GetProductsResponse.from(products.getContent(), products.getTotalElements());
+    }
+
+    public GetProductsResponse getProductsSearch(String text) {
+        final var products = productSearchService.searchProducts(text);
+        return GetProductsResponse.from(products, (long) products.size());
     }
 }
