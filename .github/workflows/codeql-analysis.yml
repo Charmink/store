@@ -37,6 +37,9 @@ jobs:
         # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
 
     steps:
+    - bash: |
+       LOG_PARAMS='-Dorg.slf4j.simpleLogger.defaultLogLevel=error -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn' 
+       mvn test -Dmaven.wagon.http.pool=false -Dsurefire.rerunFailingTestsCount=3 $LOG_PARAMS -f $(pomFilePath)
     - name: Checkout repository
       uses: actions/checkout@v3
 
