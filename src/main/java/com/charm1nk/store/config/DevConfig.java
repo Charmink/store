@@ -45,7 +45,6 @@ public class DevConfig {
                 .baselineVersion("0")
                 .baselineOnMigrate(true)
                 .schemas("public")
-                .ignoreMissingMigrations(true)
                 .outOfOrder(true)
                 .placeholderReplacement(false)
                 .load()
