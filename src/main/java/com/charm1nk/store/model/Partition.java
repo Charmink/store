@@ -16,6 +16,6 @@ public class Partition {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "partition")
+    @OneToMany(mappedBy = "partition", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Product> products;
 }

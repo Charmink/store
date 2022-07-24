@@ -4,9 +4,7 @@ import com.charm1nk.store.dto.CreateProductRequest;
 import com.charm1nk.store.dto.CreateProductResponse;
 import com.charm1nk.store.dto.GetProductResponse;
 import com.charm1nk.store.dto.GetProductsResponse;
-import com.charm1nk.store.model.Product;
 import com.charm1nk.store.service.ProductService;
-import com.charm1nk.store.service.search.ProductSearchService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -14,8 +12,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
