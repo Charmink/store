@@ -1,6 +1,5 @@
 package com.charm1nk.store.unit.controller;
 
-
 import com.charm1nk.store.common.JsonConverter;
 import com.charm1nk.store.controller.ProductController;
 import com.charm1nk.store.dto.CreateProductRequest;
@@ -9,7 +8,6 @@ import com.charm1nk.store.exception.StoreExceptionHandler;
 import com.charm1nk.store.model.Currency;
 import com.charm1nk.store.service.ProductService;
 import com.charm1nk.store.service.impl.ProductServiceImpl;
-import com.charm1nk.store.service.search.ProductSearchService;
 import com.charm1nk.store.unit.UnitTests;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

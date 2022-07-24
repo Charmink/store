@@ -19,6 +19,6 @@ public class Maker {
     @Column(name = "country", nullable = false)
     private String country;
 
-    @OneToMany(mappedBy = "maker")
+    @OneToMany(mappedBy = "maker", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Product> products;
 }

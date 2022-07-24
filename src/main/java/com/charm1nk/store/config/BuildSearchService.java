@@ -20,7 +20,6 @@ public class BuildSearchService implements ApplicationListener<ApplicationReadyE
     @PersistenceContext
     private final EntityManager entityManager;
 
-
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
         try {
