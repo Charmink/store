@@ -8,6 +8,5 @@ import com.charm1nk.store.dto.GetProductsResponse;
 public interface ProductService {
     CreateProductResponse createProduct(CreateProductRequest createProductRequest);
     GetProductResponse getProduct(Long productId);
-    GetProductsResponse getProducts(Integer page, Integer size);
-    GetProductsResponse getProductsSearch(String text);
+    GetProductsResponse getProducts(Integer page, Integer size, String query);
 }
