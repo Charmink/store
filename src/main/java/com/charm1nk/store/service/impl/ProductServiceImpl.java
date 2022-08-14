@@ -70,15 +70,8 @@ public class ProductServiceImpl implements ProductService {
         return GetProductResponse.from(product);
     }
 
-    public GetProductsResponse getProducts(Integer page, Integer size) {
-        final var pageRequest = PageRequest.of(page, size, Sort.by("id").descending());
-        final var products = productRepository.findAll(pageRequest);
-
-        return GetProductsResponse.from(products.getContent(), products.getTotalElements());
-    }
-
-    public GetProductsResponse getProductsSearch(String text) {
-        final var products = productSearchService.searchProducts(text);
-        return GetProductsResponse.from(products, (long) products.size());
+    public GetProductsResponse getProducts(Integer page, Integer size, String query) {
+        final var fullTextQuery = productSearchService.searchProducts(page, size, query);
+        return GetProductsResponse.from(fullTextQuery.getResultList(), (long) fullTextQuery.getResultSize());
     }
 }

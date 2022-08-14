@@ -48,27 +48,18 @@ public class ProductController {
 
     @GetMapping("/api/products")
     @ResponseStatus(HttpStatus.OK)
-    @ApiOperation("Запрос на постраничное получение товаров")
+    @ApiOperation("Запрос на постраничное получение товаров по полнотекстовому параметру")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Успешный ответ"),
             @ApiResponse(code = 400, message = "Бизнес ошибка"),
             @ApiResponse(code = 200, message = "Внутренняя ошибка сервера")
     })
-    public GetProductsResponse getProducts(@RequestParam Integer page, @RequestParam Integer size) {
-        log.info("Get pageable product list request, page: {}, size: {}", page, size);
-        return productService.getProducts(page, size);
-    }
-
-    @GetMapping("/api/products/search")
-    @ResponseStatus(HttpStatus.OK)
-    @ApiOperation("Запрос на полнотекстовый поиск товаров")
-    @ApiResponses({
-            @ApiResponse(code = 200, message = "Успешный ответ"),
-            @ApiResponse(code = 400, message = "Бизнес ошибка"),
-            @ApiResponse(code = 200, message = "Внутренняя ошибка сервера")
-    })
-    public GetProductsResponse getProductsFullSearch(@RequestParam String text) {
-        log.info("Get product list for full search text: {} request", text);
-        return productService.getProductsSearch(text);
+    public GetProductsResponse getProducts(
+            @RequestParam(defaultValue = "0") Integer page,
+            @RequestParam(defaultValue = "10") Integer size,
+            @RequestParam(defaultValue = "") String query
+    ) {
+        log.info("Get pageable product list request, page: {}, size: {}, query: {}", page, size, query);
+        return productService.getProducts(page, size, query);
     }
 }
