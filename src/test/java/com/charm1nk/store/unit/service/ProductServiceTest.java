@@ -179,14 +179,12 @@ public class ProductServiceTest extends UnitTests {
         final var maker = new Maker();
         maker.setName(makerName);
         maker.setCountry(randomString());
-
         return maker;
     }
 
     private Partition generatePartition() {
         final var partition = new Partition();
         partition.setName(randomString());
-
         return partition;
     }
 
